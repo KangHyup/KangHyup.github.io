@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+        window.onload = function(){
+            $(document).ready(function(){
+                
+                var click_menu = function(){
+                    $(".box").css("display", "none");
+                    $(".menubut").addClass("unuse");
+                    $("body").css("height", "auto");
+                }
+
+                $(".menubut").on("click", function() {
+                    click_menu();
+                    if ($(this).hasClass("introbut"))
+                    {
+                        $(".introduce").css("display", "block")
+                        $(this).addClass("use").removeClass("unuse");
+                    }
+                    else if ($(this).hasClass("hisbut"))
+                    {
+                        $(".history").css("display", "block")
+                        $(this).addClass("use").removeClass("unuse");
+                        $("body").css("height", "3800px");
+                    }
+                    else
+                        $(".gallery").css("display", "block")
+                        $(this).addClass("use").removeClass("unuse");
+                    })
+
+                $(".history div").on("click", function(){
+                    var num = $(this).index(".some")
+                    $("img:eq("+(num+1)+")").fadeToggle()
+
+                })
+
+                var LoadImg = function(){
+
+                    for( i = 1; i <= 41; i++)
+                    {   
+                        //새로운 이미지 div 추가
+                        var newImage = document.createElement("img");
+
+                        //이미지 source 가져오기
+                        newImage.src = ("./사진/gallery/일본/jp"+i+".jpg");
+                        newImage.style.width = "350px";
+                        newImage.style.height = "auto";
+                        newImage.style.margin = "10px";
+                        newImage.style.objectFit = "contain";
+
+                        //이미지를 image-show div에 추가
+                        var container = document.getElementById('Japan');
+                        container.appendChild(newImage);
+                    }
+
+                    for( i = 1; i <= 27; i++)
+                    {   
+                        var newImage = document.createElement("img");
+
+                        newImage.src = ("./사진/gallery/부산/bu"+i+".jpg");
+                        newImage.style.width = "350px";
+                        newImage.style.height = "auto";
+                        newImage.style.margin = "10px";
+                        newImage.style.objectFit = "contain";
+
+                        var container = document.getElementById('Busan');
+                        container.appendChild(newImage);
+                    }
+
+                    for( i = 1; i <= 16; i++)
+                    {   
+                        var newImage = document.createElement("img");
+
+                        newImage.src = ("./사진/gallery/기타/oth"+i+".jpg");
+                        newImage.style.width = "350px";
+                        newImage.style.height = "auto";
+                        newImage.style.margin = "10px";
+                        newImage.style.objectFit = "contain";
+
+                        var container = document.getElementById('Others');
+                        container.appendChild(newImage);
+                    }
+                }
+                LoadImg();
+                
+                $("#japbut")
+                    .on('click', function(){$("table td").addClass("hide")})
+                    .on('click', function(){$("#Japan").removeClass("hide")})
+                    .on('click', function(){$("table th").addClass("unuse")})
+                    .on('click', function(){$(this).addClass("use").removeClass("unuse")})
+
+
+                $("#busbut")
+                    .on('click', function(){$("table td").addClass("hide")})
+                    .on('click', function(){$("#Busan").removeClass("hide")})
+                    .on('click', function(){$("table th").addClass("unuse")})
+                    .on('click', function(){$(this).addClass("use").removeClass("unuse")})
+
+
+                $("#othbut")
+                    .on('click', function(){$("table td").addClass("hide")})
+                    .on('click', function(){$("#Others").removeClass("hide")})
+                    .on('click', function(){$("table th").addClass("unuse")})
+                    .on('click', function(){$(this).addClass("use").removeClass("unuse")})
+            }
+            )}
+    </script>
+        
+    <style>
+        
+        * { margin: 0; padding: 0; }
+        header div{float: left; left: 5%; top: 5%; position: absolute;}
+        header tr {float: right; right: 5%; top: 5%; position: absolute;}
+        header th {width: 150px; height: 80px;}
+
+        .hide {display: none;}
+        .use{background-color: #ffffff;}
+        .unuse{background-color: #757575bd; color: #cececeda;}
+
+        .box{overflow: hidden; object-fit: contain;}
+        .introduce{ width: 1200px; height: 600px; border: 1px solid black;
+                    position: absolute;
+                    left: 50%; top: 55%;
+                    margin-left: -600px; margin-top: -300px;
+                    display: block;}
+        .introduce .imgbox {float: left; height: 300px; margin: 10px;}
+        .introduce .imgbox img{width: auto; max-height: 100%; }
+        .introduce .introbox { margin: 15px; position: relative; display: block;}
+        .introduce .eng { margin: 10px; position: relative; display: inline-block;}
+        
+        .history{  width: 1200px; height: 3300px; border: 1px solid black;
+                    background-image: url("사진/연도표.png"); background-repeat: no-repeat;
+                    position: absolute; object-fit: fill;
+                    left: 50%; top: 55%;
+                    margin-left: -600px; margin-top: -300px;
+                }
+        .history div{font-size: xx-large; position: absolute; font-weight: 800; left: 55%;}
+        .history .some{color: #07d107;}
+        .history img{width: 370px; border-radius: 25%; border: 5px dashed black;
+                     display: none; position: absolute; left: 10%;
+                    }
+
+        .gallery{   left: 50%; top: 55%;
+                    position: absolute;
+                    margin-left: -600px; margin-top: -300px;
+                }
+        .gallery th { width: 300px; border: 1px solid black;}
+        .gallery td { width: 1200px; height: 600px; border: 1px solid black;}
+        .gallery img { width: 300px; height: auto; margin: 10px; display: inline-block; }
+
+        @media screen and (max-width: 1200px) {
+
+        header tr{float: left; position: absolute; left: 5%; top: 13%;}
+        header th{display: block;}
+        header h2{top: 30% ;position: relative;}
+        .box{width: 80%; height: auto; left: 5%; right: 5%; margin: auto; top: 40%;}
+        .history{height: 3300px;}
+
+        }
+
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <header>
+        <div><h1>LEE KANG HYUP</h1></div>
+        <table border="1">
+            <tr>
+                <th class = "menubut introbut"><h2>introduce</h2></button>
+                <th class = "menubut hisbut"><h2>history</h2></button>
+                <th class = "menubut galbut"><h2>gallery</h2></button>
+            </tr>
+        </table>
+    </header>
+    
+    <div class = "box introduce">
+        <div class = "imgbox">
+            <img src="사진/이강협.jpg">
+        </div>
+        <div class="introbox">
+        <p>
+            <h2>안녕하세요, 강원대학교 21학번 컴퓨터공학과 이강협입니다. 
+            인천광역시에서 살다가 강원대학교에 다니기 위해 지금은 춘천에서 살고 있습니다. <br>
+            어렸을 때부터 자주 이사를 다니고, 해외로 봉사활동을 가거나 유학을 가는 등 낯선 환경 속에서 새롭게 적응해야 하는 경우가 많았습니다. 
+            낯선 언어와 처음 마주하는 환경들은 압박감과 두려움을 가져다 주었지만, 그와 동시에 설렘과 기대감도 함께 다가왔습니다.<br>
+            특히, 나이를 먹고 성인이 된 이후에는 다양한 경험을 통해 시야가 넓어진 것에 고마움을 느끼기도 합니다. 
+            이처럼 다양한 경험을 하며 조금은 먼 길을 돌아오느라 올해 25살로 다른 학우들에 비해 조금 늦게 출발했습니다, 
+            지금부터 함께 발을 맞추며 걸어갈 수 있도록 더욱 노력하겠습니다!
+        </h2></p>
+        </div>
+
+        <div class="eng">
+        <p>
+            <h3>Hello, I am Kang Hyeop Lee, majoring in computer engineering at Kangwon National University. 
+                I lived in Incheon Metropolitan City and now I live in Chuncheon to attend Kangwon National University.
+                Since I was young, I have often had to adapt myself to unfamiliar environments such as moving often, 
+                going abroad for volunteer work or studying abroad. The unfamiliar language and the environment I encountered for the first time brought pressure and fear,
+                but at the same time, excitement and expectation came along.
+                In particular, after I get older and become an adult, 
+                I feel grateful that my perspective has expanded through various experiences. 
+                I started a little later than my other classmates at the age of 25 this year to come back a little bit with these various experiences,
+                so I will try harder to walk with my feet in sync from now on!
+        </h3></p>
+        </div>
+    </div>
+
+    <div class="box history hide">
+        <P style="color: red;">&nbsp;*누르면 이미지가 나옵니다*</P>
+        <div class = "some" style="top: 5%;">1998.12.13 출생</div> <img src ="./사진/history/his1.jpg" style="top: 2%; ">
+
+        <div class = "some"  style="top: 15%;">2005~2011 인주초등학교 졸업</div> <img src ="./사진/history/his2.PNG" style="top: 13%;">
+
+        <div class = "some"  style="top: 23%;">2011~2012 인주중학교 재학</div> <img src ="./사진/history/his3.jpg" style="top: 20%; left: 13%; width: 250px;">
+
+        <div style="top: 30%; left: auto; background-color: gray; color: white; width: 1200px; text-align: center;">*2012 인천청라로 이사*</div>
+        <div class = "some"  style="top: 36%;">2012~2014 해원중학교 졸업</div> <img src ="./사진/history/his4.jpg" style="top: 33%; width: 450px; left: 5%;">
+        <div class = "some"  style="top: 50%;">2014~2017 해원고등학교 졸업</div> <img src ="./사진/history/his5.png" style="top: 43%;" >
+        <div class = "some"  style="top: 65%;">2017~2018 일본 유학</div> <img src ="./사진/history/his6.jpg" style="top: 60%; width: 450px; left: 3%;" >
+        <div class = "some"  style="top: 76%;">2018~2020 군복무</div> <img src ="./사진/history/his7.jpg" style="top: 71%; width: 450px; left: 3%;" >
+        <div style="top: 85%; left: auto; background-color: gray; color: white; width: 1200px; text-align: center;">2020 재수</div>
+        <div style="bottom: 3%; left: 30%;">2021~현재: 강원대학교 재학중</div> <img src ="./사진/history/hisLast.png" style="bottom: 3%; left: 5%; border: none; display: block;">
+                
+    </div>
+
+    <table class="box gallery hide">
+        <tr>
+            <th id = "japbut" class = "but"><h2>Japan</h2></button>
+            <th id = "busbut" class = "but"><h2>Busan</h2></button>
+            <th id = "othbut" class = "but"><h2>Others</h2></button>
+        </tr>
+        <tr>
+            <td id = "Japan" colspan="4">
+                
+            </td>
+            <td id = "Busan" colspan="4" class="hide">
+                
+            </td>
+            <td id = "Others" colspan="4"  class="hide">
+
+            </td>
+        </tr>
+    </div>
+</body>
+</html>
